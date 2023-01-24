@@ -3,7 +3,7 @@ name: TestMbNetworkGo
 on: [push]
 
 jobs:
-  test:
+  run_tests:
 
     runs-on: ubuntu-latest
 
