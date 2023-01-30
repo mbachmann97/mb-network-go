@@ -8,7 +8,7 @@ import (
 
 type ip uint32
 
-func newIpFromString(s string) (ip, error) {
+func NewIpFromString(s string) (ip, error) {
 	var packaged ip
 	stringOctets := strings.Split(s, ".")
 	if len(stringOctets) == 4 {
@@ -26,6 +26,16 @@ func newIpFromString(s string) (ip, error) {
 	} else {
 		return 0, errors.New("octet count not equal to 4")
 	}
+}
+
+func (i ip) IsValid() bool {
+	octets := []uint32{uint32(i >> 24), uint32(i >> 16 & 0xFF), uint32(i >> 8 & 0xFF), uint32(i & 0xFF)}
+	for _, octet := range octets {
+		if octet > 255 {
+			return false
+		}
+	}
+	return true
 }
 
 func (i ip) String() string {
