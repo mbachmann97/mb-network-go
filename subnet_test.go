@@ -1,4 +1,4 @@
-package main
+package mbnetworkgo
 
 import "testing"
 
@@ -54,7 +54,7 @@ func TestPossibleHostsCount(t *testing.T) {
 	t.Run("PossibleHostsCount of 10.22.1.32/8 is 16777214", func(t *testing.T) {
 		ip, _ := NewIpFromString("10.22.1.32")
 		s, _ := NewSubnet(ip, 8)
-		if s.PossibleHostsCount() != 16777214 {
+		if s.PossibleHosts() != 16777214 {
 			t.Error("Expected the possible hosts count to be 16777214 got", s.PossibleHostsCount())
 		}
 	})

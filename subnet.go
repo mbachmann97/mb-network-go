@@ -1,4 +1,4 @@
-package main
+package mbnetworkgo
 
 import (
 	"errors"
@@ -50,7 +50,7 @@ func (s *subnet) LastUsable() ip {
 	return s.Broadcast() - 1
 }
 
-func (s *subnet) PossibleHostsCount() uint32 {
+func (s *subnet) PossibleHosts() uint32 {
 	return uint32(s.LastUsable() - s.FirstUsable() + 1)
 }
 
