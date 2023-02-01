@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-type ip uint32
+type Ip uint32
 
-func NewIpFromString(s string) (ip, error) {
-	var packaged ip
+func NewIpFromString(s string) (Ip, error) {
+	var packaged Ip
 	stringOctets := strings.Split(s, ".")
 	if len(stringOctets) == 4 {
 		octets := make([]uint32, 4)
@@ -20,7 +20,7 @@ func NewIpFromString(s string) (ip, error) {
 			}
 			octets[i] = uint32(o)
 		}
-		packaged = ip(octets[0]<<24 | octets[1]<<16 | octets[2]<<8 | octets[3])
+		packaged = Ip(octets[0]<<24 | octets[1]<<16 | octets[2]<<8 | octets[3])
 
 		return packaged, nil
 	} else {
@@ -28,7 +28,7 @@ func NewIpFromString(s string) (ip, error) {
 	}
 }
 
-func (i ip) IsValid() bool {
+func (i Ip) IsValid() bool {
 	octets := []uint32{uint32(i >> 24), uint32(i >> 16 & 0xFF), uint32(i >> 8 & 0xFF), uint32(i & 0xFF)}
 	for _, octet := range octets {
 		if octet > 255 {
@@ -38,6 +38,6 @@ func (i ip) IsValid() bool {
 	return true
 }
 
-func (i ip) String() string {
+func (i Ip) String() string {
 	return strconv.Itoa(int(i>>24)) + "." + strconv.Itoa(int(i>>16&0xFF)) + "." + strconv.Itoa(int(i>>8&0xFF)) + "." + strconv.Itoa(int(i&0xFF))
 }
