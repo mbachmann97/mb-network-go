@@ -17,7 +17,9 @@ func NewSubnet(ip ip, suffix uint8) (subnet, error) {
 	if !ip.IsValid() {
 		return subnet{}, errors.New("invalid ip")
 	}
-	return subnet{ip, suffix}, nil
+	s := subnet{ip, suffix}
+	s.netAddr = s.CalcNetAddr()
+	return s, nil
 }
 
 func (s *subnet) CalcNetMask() ip {

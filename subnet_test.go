@@ -10,6 +10,13 @@ func TestNewSubnet(t *testing.T) {
 			t.Error("Expected suffix invalid error got", err)
 		}
 	})
+	t.Run("NewSubnet sets netAddr correctly", func(t *testing.T) {
+		ip, _ := NewIpFromString("192.160.1.23")
+		s, _ := NewSubnet(ip, 24)
+		if s.netAddr != 0xc0a00100 {
+			t.Error("Expected suffix 192.160.1.0 got", s.netAddr)
+		}
+	})
 }
 
 func TestCalcNetMask(t *testing.T) {
