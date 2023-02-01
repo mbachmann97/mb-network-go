@@ -55,7 +55,7 @@ func TestPossibleHostsCount(t *testing.T) {
 		ip, _ := NewIpFromString("10.22.1.32")
 		s, _ := NewSubnet(ip, 8)
 		if s.PossibleHosts() != 16777214 {
-			t.Error("Expected the possible hosts count to be 16777214 got", s.PossibleHostsCount())
+			t.Error("Expected the possible hosts count to be 16777214 got", s.PossibleHosts())
 		}
 	})
 }
