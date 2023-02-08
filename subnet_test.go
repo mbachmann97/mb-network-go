@@ -13,15 +13,15 @@ func TestNewSubnet(t *testing.T) {
 	t.Run("NewSubnet sets netAddr correctly", func(t *testing.T) {
 		ip, _ := NewIpFromString("192.160.1.23")
 		s, _ := NewSubnet(ip, 24)
-		if s.netAddr != 0xc0a00100 {
-			t.Error("Expected suffix 192.160.1.0 got", s.netAddr)
+		if s.NetAddr != 0xc0a00100 {
+			t.Error("Expected suffix 192.160.1.0 got", s.NetAddr)
 		}
 	})
 }
 
 func TestCalcNetMask(t *testing.T) {
 	t.Run("CalcNetMask with suffix 24 will return 255.255.255.0", func(t *testing.T) {
-		s := Subnet{netAddr: 0, suffix: 24}
+		s := Subnet{NetAddr: 0, Suffix: 24}
 		if s.CalcNetMask() != 0xffffff00 {
 			t.Error("Expected the netmask to be 255.255.255.0 got", s.CalcNetMask())
 		}
@@ -40,7 +40,7 @@ func TestCalcNetAddr(t *testing.T) {
 
 func TestInverseNetMask(t *testing.T) {
 	t.Run("255.252.0.0 is 0.2.255.255 inversed", func(t *testing.T) {
-		s := Subnet{netAddr: 0, suffix: 14}
+		s := Subnet{NetAddr: 0, Suffix: 14}
 		if s.InverseNetMask() != 0x0003ffff {
 			t.Error("Expected the inverse netmask to be 0.2.255.255 got", s.InverseNetMask())
 		}
@@ -89,7 +89,7 @@ func TestContains(t *testing.T) {
 
 func TestString(t *testing.T) {
 	t.Run("String of ip 8.8.8.8 and suffix 8 is 8.8.8.8/8", func(t *testing.T) {
-		s := Subnet{netAddr: 0x08080808, suffix: 8}
+		s := Subnet{NetAddr: 0x08080808, Suffix: 8}
 		if s.String() != "8.8.8.8/8" {
 			t.Error("Expected the subnet to be 8.8.8.8/8 got", s.String())
 		}
