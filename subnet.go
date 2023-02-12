@@ -1,6 +1,8 @@
 package mbnetworkgo
 
 import (
+	"bytes"
+	"encoding/gob"
 	"errors"
 	"strconv"
 )
@@ -62,4 +64,17 @@ func (s *Subnet) Contains(ip Ip) bool {
 
 func (s Subnet) String() string {
 	return s.NetAddr.String() + "/" + strconv.Itoa(int(s.Suffix))
+}
+
+// TODO: add tests
+func (s *Subnet) GobEncode() ([]byte, error) {
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	if err := enc.Encode(s.NetAddr); err != nil {
+		return nil, err
+	}
+	if err := enc.Encode(s.Suffix); err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
 }
