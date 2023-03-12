@@ -1,8 +1,6 @@
 package mbnetworkgo
 
 import (
-	"bytes"
-	"encoding/gob"
 	"errors"
 	"strconv"
 )
